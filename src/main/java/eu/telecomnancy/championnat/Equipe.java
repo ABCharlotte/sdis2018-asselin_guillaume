@@ -9,21 +9,21 @@ import java.util.ArrayList;
 import java.util.List;
 @Data
 @Entity
-public class Equipes {
+public class Equipe {
 
     private @Id
     @GeneratedValue
     Long id;
     private String name;
 
-    //public List <Matches> matches;
+    //public List <Match> matches;
 
-    public Equipes(String name) {
+    public Equipe(String name) {
         this.name = name;
     }
 
-    //public void addMatches(Matches match){ this.matches.add(match); }
+    //public void addMatches(Match match){ this.matches.add(match); }
 
-    //public List<Matches> getMatches() {return matches;}
+    //public List<Match> getMatches() {return matches;}
 }
 

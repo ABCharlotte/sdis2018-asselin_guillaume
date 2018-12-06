@@ -3,12 +3,12 @@ package eu.telecomnancy.championnat;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-public class Matches {
+public class Match {
     private @Id
     @GeneratedValue
     Long id;
-    private Equipes domicile;
-    private Equipes exterieur;
+    private Equipe domicile;
+    private Equipe exterieur;
 
     private String status;//PREVU|EN COURS|PAUSE|FINI|REPORTE|ANNULE
 
@@ -39,7 +39,7 @@ public class Matches {
         this.scoreB = scoreB;
     }
 
-    Matches(Equipes domicile, Equipes exterieur) {
+    Match(Equipe domicile, Equipe exterieur) {
         this.domicile=domicile;
         this.exterieur=exterieur;
         this.scoreA=0;
