@@ -82,7 +82,22 @@ public class CompetitionController {
     }*/
 
     @PutMapping("/competitions/{id}")
-    Competition remplaceCompetition(@RequestBody Competition newCompetition, @PathVariable Long id){
+    ResponseEntity<?> replaceCompetition(@RequestBody Competition newCompetition, @PathVariable Long id) throws URISyntaxException{
+        Competition updatedCompetition = repository.findById(id)
+                .map(competition -> {
+                    competition.setName(newCompetition.getName());
+                    competition.setEquipes(newCompetition.getEquipes());
+                    return repository.save(competition);
+                })
+                .orElseGet(() -> {
+                    newCompetition.setId(id);
+                    return repository.save(newCompetition);
+                });
+        Resource<Competition> resource = assembler.toResource(updatedCompetition);
+        return ResponseEntity
+                .created(new URI(resource.getId().expand().getHref()))
+                .body(resource);
+    }/*Competition remplaceCompetition(@RequestBody Competition newCompetition, @PathVariable Long id){
         return repository.findById(id)
                 .map(competition -> {
                     competition.setName(newCompetition.getName());
@@ -93,11 +108,15 @@ public class CompetitionController {
                     newCompetition.setId(id);
                     return repository.save(newCompetition);
                 });
-    }
+    }*/
 
     @DeleteMapping("/competitions/{id}")
+    ResponseEntity<?> deleteCompetition(@PathVariable Long id){
+        repository.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }/*
     void deleteCompetition(@PathVariable Long id){
         repository.deleteById(id);
-    }
+    }*/
 
 }
