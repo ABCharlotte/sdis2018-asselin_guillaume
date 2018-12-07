@@ -2,7 +2,7 @@ package eu.telecomnancy.championnat;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-interface CompetitionsRepository extends  JpaRepository<Competitions, Long> {
+interface CompetitionRepository extends  JpaRepository<Competition, Long> {
     // creating new instances
     // updating existing ones
     // deleting
