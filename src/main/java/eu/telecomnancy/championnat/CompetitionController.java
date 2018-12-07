@@ -3,16 +3,12 @@ package eu.telecomnancy.championnat;
 import java.util.List;
 
 import org.springframework.hateoas.Resource;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 
 @RestController
@@ -42,7 +38,7 @@ public class CompetitionController {
         return repository.findById(id)
                 .orElseThrow(() -> new CompetitionNotFoundException(id));
     }*/
-    @GetMapping("/competitions/{id}")
+    @RequestMapping(value = "/competitions/{id}", method = GET, produces = MediaType.APPLICATION_JSON_VALUE) //@GetMapping("/competitions/{id}")
     Resource<Competition> one(@PathVariable Long id){
         Competition competition = repository.findById(id)
                 .orElseThrow(() -> new CompetitionNotFoundException(id));
