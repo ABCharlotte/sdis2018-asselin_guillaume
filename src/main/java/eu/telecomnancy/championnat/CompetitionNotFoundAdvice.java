@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ControllerAdvice
 public class CompetitionNotFoundAdvice {
 
+
     @ResponseBody
     @ExceptionHandler(CompetitionNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)

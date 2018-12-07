@@ -21,6 +21,7 @@ class LoadDatabase {
             Competition maCompet= new Competition("JIG");
             maCompet.addEquipe(new Equipe("ISS"));
             maCompet.addEquipe(new Equipe("IL"));
+
             log.info("Preloading"+repository.save(maCompet));
             log.info("Preloading"+repository.save(new Competition("CoupeEst") ));
             log.info("Preloading"+repository.save(new Competition("RegionNancy") ));
