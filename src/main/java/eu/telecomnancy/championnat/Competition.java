@@ -24,6 +24,10 @@ public class Competition {
         this.name=name_compet;
     }
 
+    public Competition(){
+        new Competition("NoName");
+    }
+
     public String getName(){
         return this.name;
     }
