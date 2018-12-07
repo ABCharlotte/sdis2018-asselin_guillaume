@@ -1,12 +1,9 @@
 package eu.telecomnancy.championnat;
 
 import lombok.extern.slf4j.Slf4j;
-
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import java.util.ArrayList;
 
 @Configuration
 @Slf4j
@@ -20,9 +17,10 @@ class LoadDatabase {
             log.info("Preloading"+repository.save(new Competitions("RegionNancy", new ListEquipes().put(new Equipe("Nancy")).put(new Equipe("Laxou")).put(new Equipe("Villers")).put(new Equipe("Vandoeuvre")) )));
             */
             /*log.info("Preloading"+repository.save(new Competitions("CoupeEst", new Equipe("France"), new Equipe("Belgique") ) ));
-            log.info("Preloading"+repository.save(new Competitions("RegionNancy", new Equipe("Laxou"), new Equipe("Villers") ) ));*/
+            log.info("Preloading"+repository.save(new Equipe("New Team"));*/
             log.info("Preloading"+repository.save(new Competitions("CoupeEst") ));
             log.info("Preloading"+repository.save(new Competitions("RegionNancy") ));
         };
     }
+
 }
