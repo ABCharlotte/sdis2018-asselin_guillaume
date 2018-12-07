@@ -5,10 +5,12 @@ import lombok.Data;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+//import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 
 @Data
 @Entity
+//@XmlRootElement //to RESTful
 public class Competition {
     private @Id @GeneratedValue Long id;
     public ListEquipes equipes_participantes;

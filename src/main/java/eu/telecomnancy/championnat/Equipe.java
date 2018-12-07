@@ -10,14 +10,28 @@ import java.io.Serializable;
 @Entity
 public class Equipe implements Serializable {
 
-    private @Id
-    @GeneratedValue
-    Long id;
+    private @Id @GeneratedValue Long id;
     private String name;
 
     //public List <Match> matches;
 
     public Equipe(String name) {
+        this.name = name;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
         this.name = name;
     }
 
