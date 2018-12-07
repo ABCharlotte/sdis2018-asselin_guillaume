@@ -11,4 +11,13 @@ public class ChampionnatApplication {
     }
 
 }
-//localhost:8080/employees
+/* ***En lignes de commandes ***
+-- lancer :
+curl -v localhost:8080/competitions
+-- ajout :
+curl -X POST localhost:8080/competitions -H 'Content-type:application/json' -d '{"name": "CompetitionDeTest"}'
+-- changement
+curl -X PUT localhost:8080/competitions/3 -H 'Content-type:application/json' -d '{"name": "Competition_De_Test"}'
+-- suppression
+curl -X DELETE localhost:8080/competitions/3
+*/
