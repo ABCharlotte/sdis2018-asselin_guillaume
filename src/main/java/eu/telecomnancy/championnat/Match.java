@@ -10,16 +10,23 @@ public class Match {
     private Equipe domicile;
     private Equipe exterieur;
 
-    private String status;//PREVU|EN COURS|PAUSE|FINI|REPORTE|ANNULE
+    private Status status;
+    protected enum Status {
+        PREVU,
+        EN_COURS,
+        PAUSE,FINI,
+        REPORTE,
+        ANNULE;
+    }
 
     private int scoreA;
     private int scoreB;
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
