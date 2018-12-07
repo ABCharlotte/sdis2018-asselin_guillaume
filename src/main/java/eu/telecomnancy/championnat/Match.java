@@ -1,26 +1,57 @@
 package eu.telecomnancy.championnat;
 
+import lombok.Data;
+
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
+enum Status {
+    PREVU,
+    EN_COURS,
+    PAUSE,
+    FINI,
+    REPORTE,
+    ANNULE;
+}
+
+@Entity
+@Data
+@Table(name = "MATCHES")
 public class Match {
-    private @Id
-    @GeneratedValue
-    Long id;
+    private @Id @GeneratedValue Long id;
     private Equipe domicile;
     private Equipe exterieur;
 
     private Status status;
-    protected enum Status {
-        PREVU,
-        EN_COURS,
-        PAUSE,FINI,
-        REPORTE,
-        ANNULE;
-    }
+    //public final SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yy, h:mm");
+    private String date;
+
 
     private int scoreDom;
     private int scoreGuest;
+
+    Match(Equipe domicile, Equipe exterieur, Status state, String date) {
+        this.domicile=domicile;
+        this.exterieur=exterieur;
+        this.scoreDom=0;
+        this.scoreGuest=0;
+        this.status=state;
+        this.date=date;
+    }
+
+    Match(Equipe domicile, Equipe exterieur) {
+        new Match(domicile,exterieur,Status.PREVU,"jj/MM/AA, hh:mm");//formatDate.format(new Date()));
+    }
+    Match(){
+        new Match(null, null);
+    }
+
+
 
     public Status getStatus() {
         return status;
@@ -46,16 +77,12 @@ public class Match {
         this.scoreGuest = scoreGuest;
     }
 
-    Match(Equipe domicile, Equipe exterieur, Status state) {
-        this.domicile=domicile;
-        this.exterieur=exterieur;
-        this.scoreDom=0;
-        this.scoreGuest=0;
-        this.status=state;
+
+    public String getDate() {
+        return date;
     }
 
-    Match(Equipe domicile, Equipe exterieur) {
-        new Match(domicile,exterieur,Status.PREVU);
+    public void setDate(String date) {
+        this.date = date;
     }
-
 }

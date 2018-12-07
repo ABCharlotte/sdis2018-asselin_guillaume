@@ -21,7 +21,6 @@ import java.util.stream.Collectors;
 public class CompetitionController {
 
     private final CompetitionRepository repository;
-
     private final CompetitionResourceAssembler assembler;
 
     CompetitionController(CompetitionRepository repository,
