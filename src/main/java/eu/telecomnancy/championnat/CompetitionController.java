@@ -2,8 +2,13 @@ package eu.telecomnancy.championnat;
 
 import java.util.List;
 
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class CompetitionController {
@@ -20,7 +25,7 @@ public class CompetitionController {
         return repository.findAll();
     }
 
-    @PostMapping("competitions")
+    @PostMapping("/competitions")
     Competition newCompetition(@RequestBody Competition newCompetition){
         return repository.save(newCompetition);
     }
@@ -32,7 +37,7 @@ public class CompetitionController {
                 .orElseThrow(() -> new CompetitionNotFoundException(id));
     }
 
-    @PutMapping("competitions/{id}")
+    @PutMapping("/competitions/{id}")
     Competition remplaceCompetition(@RequestBody Competition newCompetition, @PathVariable Long id){
         return repository.findById(id)
                 .map(competition -> {
