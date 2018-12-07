@@ -7,6 +7,7 @@ public class ListEquipes extends ArrayList<Equipe> {
         super();
     }
 
+
     public ListEquipes put (Equipe new_equipe){
         this.add(new_equipe);
         return this;
