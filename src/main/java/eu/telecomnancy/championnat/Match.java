@@ -10,40 +10,52 @@ public class Match {
     private Equipe domicile;
     private Equipe exterieur;
 
-    private String status;//PREVU|EN COURS|PAUSE|FINI|REPORTE|ANNULE
+    private Status status;
+    protected enum Status {
+        PREVU,
+        EN_COURS,
+        PAUSE,FINI,
+        REPORTE,
+        ANNULE;
+    }
 
-    private int scoreA;
-    private int scoreB;
+    private int scoreDom;
+    private int scoreGuest;
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
-    public int getScoreA() {
-        return scoreA;
+    public int getScoreDom() {
+        return scoreDom;
     }
 
-    public void setScoreA(int scoreA) {
-        this.scoreA = scoreA;
+    public void setScoreDom(int scoreDom) {
+        this.scoreDom = scoreDom;
     }
 
-    public int getScoreB() {
-        return scoreB;
+    public int getScoreGuest() {
+        return scoreGuest;
     }
 
-    public void setScoreB(int scoreB) {
-        this.scoreB = scoreB;
+    public void setScoreGuest(int scoreGuest) {
+        this.scoreGuest = scoreGuest;
+    }
+
+    Match(Equipe domicile, Equipe exterieur, Status state) {
+        this.domicile=domicile;
+        this.exterieur=exterieur;
+        this.scoreDom=0;
+        this.scoreGuest=0;
+        this.status=state;
     }
 
     Match(Equipe domicile, Equipe exterieur) {
-        this.domicile=domicile;
-        this.exterieur=exterieur;
-        this.scoreA=0;
-        this.scoreB=0;
+        new Match(domicile,exterieur,Status.PREVU);
     }
 
 }
