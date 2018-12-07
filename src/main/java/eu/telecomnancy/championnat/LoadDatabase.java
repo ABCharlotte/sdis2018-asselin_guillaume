@@ -18,6 +18,10 @@ class LoadDatabase {
             */
             /*log.info("Preloading"+repository.save(new Competition("CoupeEst", new Equipe("France"), new Equipe("Belgique") ) ));
             log.info("Preloading"+repository.save(new Competition("RegionNancy", new Equipe("Laxou"), new Equipe("Villers") ) ));*/
+            Competition maCompet= new Competition("JIG");
+            maCompet.addEquipe(new Equipe("ISS"));
+            maCompet.addEquipe(new Equipe("IL"));
+            log.info("Preloading"+repository.save(maCompet));
             log.info("Preloading"+repository.save(new Competition("CoupeEst") ));
             log.info("Preloading"+repository.save(new Competition("RegionNancy") ));
         };

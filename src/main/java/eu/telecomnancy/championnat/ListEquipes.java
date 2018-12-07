@@ -13,4 +13,5 @@ public class ListEquipes extends ArrayList<Equipe> {
         return this;
     }
 
+
 }

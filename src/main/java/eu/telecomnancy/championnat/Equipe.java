@@ -5,11 +5,10 @@ import lombok.Data;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.Serializable;
 @Data
 @Entity
-public class Equipe {
+public class Equipe implements Serializable {
 
     private @Id
     @GeneratedValue

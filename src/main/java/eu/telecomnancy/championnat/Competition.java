@@ -22,6 +22,8 @@ public class Competition {
         this.equipes_participantes.put(participant1);*/
     public Competition(String name_compet){
         this.name=name_compet;
+        this.equipes_participantes= new ListEquipes();
+        this.classement= new ArrayList<Equipe>();
     }
 
     public Competition(){
