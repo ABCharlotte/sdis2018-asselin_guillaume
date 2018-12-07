@@ -1,14 +1,13 @@
 package eu.telecomnancy.championnat;
 
 import org.springframework.hateoas.Resource;
-import org.springframework.hateoas.Resources;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
+
 
 @RestController
 public class CompetitionController {
@@ -60,15 +59,15 @@ public class CompetitionController {
     Competition one(@PathVariable Long id){
         return repository.findById(id)
                 .orElseThrow(() -> new CompetitionNotFoundException(id));
-    }
-    @GetMapping("/competitions/{id}")
+    }*/
+    @RequestMapping(value = "/competitions/{id}", method = GET, produces = MediaType.APPLICATION_JSON_VALUE) //@GetMapping("/competitions/{id}")
     Resource<Competition> one(@PathVariable Long id){
         Competition competition = repository.findById(id)
                 .orElseThrow(() -> new CompetitionNotFoundException(id));
         return new Resource<>(competition,
                 linkTo(methodOn(CompetitionController.class).one(id)).withSelfRel(),
                 linkTo(methodOn(CompetitionController.class).all()).withRel("competitions"));
-    }*/
+    }/*
     @GetMapping("/competitions/{id}")
     Resource<Competition> one(@PathVariable Long id) {
 
@@ -76,7 +75,7 @@ public class CompetitionController {
                 .orElseThrow(() -> new CompetitionNotFoundException(id));
 
         return assembler.toResource(competition);
-    }
+    }*/
 
     @PutMapping("/competitions/{id}")
     Competition remplaceCompetition(@RequestBody Competition newCompetition, @PathVariable Long id){
