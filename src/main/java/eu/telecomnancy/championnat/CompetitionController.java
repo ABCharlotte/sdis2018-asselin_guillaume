@@ -85,7 +85,7 @@ public class CompetitionController {
         Competition updatedCompetition = repository.findById(id)
                 .map(competition -> {
                     competition.setName(newCompetition.getName());
-                    competition.setEquipes(newCompetition.getEquipes());
+                    competition.setEquipesIds(newCompetition.getEquipesIds());
                     return repository.save(competition);
                 })
                 .orElseGet(() -> {

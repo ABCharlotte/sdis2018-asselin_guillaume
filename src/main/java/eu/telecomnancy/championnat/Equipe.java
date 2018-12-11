@@ -19,6 +19,8 @@ public class Equipe implements Serializable {
         this.name = name;
     }
 
+    public Equipe() { new Equipe("Anonymous");}
+
     public Long getId() {
         return id;
     }

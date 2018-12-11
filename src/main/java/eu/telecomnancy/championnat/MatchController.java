@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.PUT;
 
 @RestController
 public class MatchController {
@@ -67,7 +68,8 @@ public class MatchController {
                 .status(HttpStatus.METHOD_NOT_ALLOWED)
                 .body(new VndErrors.VndError("Method not allowed","Vous ne pouvez pas annuler un match déjà démarré ou fini, or celui-ci est "+match.getStatus()+"."));
     }
-    @PutMapping("/match/{id}/pause")
+
+    @RequestMapping(value = "/match/{id}/pause", method = PUT, produces = MediaType.APPLICATION_JSON_VALUE) //@PutMapping("/match/{id}/pause")
     ResponseEntity<ResourceSupport> pause(@PathVariable Long id){
         Match match = matchRepository.findById(id).orElseThrow(()->new MatchNotFoundException(id));
         if(match.getStatus()==Status.EN_COURS){
@@ -78,7 +80,8 @@ public class MatchController {
                 .status(HttpStatus.METHOD_NOT_ALLOWED)
                 .body(new VndErrors.VndError("Method not allowed","Vous ne pouvez pas mettre en pause un match qui n'est pas en cours, or celui-ci est "+match.getStatus()+"."));
     }
-    @PutMapping("/match/{id}/fini")
+
+    @RequestMapping(value = "/match/{id}/fini", method = PUT, produces = MediaType.APPLICATION_JSON_VALUE) //@PutMapping("/match/{id}/fini")
     ResponseEntity<ResourceSupport> fini(@PathVariable Long id){
         Match match = matchRepository.findById(id).orElseThrow(()->new MatchNotFoundException(id));
         if(match.getStatus()==Status.EN_COURS){
@@ -89,7 +92,8 @@ public class MatchController {
                 .status(HttpStatus.METHOD_NOT_ALLOWED)
                 .body(new VndErrors.VndError("Method not allowed","Seul un match en cours pour être considéré comme fini, or celui-ci est "+match.getStatus()+"."));
     }
-    @PutMapping("/match/{id}/en_cours")
+
+    @RequestMapping(value = "/match/{id}/en_cours", method = PUT, produces = MediaType.APPLICATION_JSON_VALUE) //@PutMapping("/match/{id}/en_cours")
     ResponseEntity<ResourceSupport> enCours(@PathVariable Long id){
         Match match = matchRepository.findById(id).orElseThrow(()->new MatchNotFoundException(id));
         if(match.getStatus()==Status.PREVU || match.getStatus()==Status.PAUSE){
@@ -100,7 +104,8 @@ public class MatchController {
                 .status(HttpStatus.METHOD_NOT_ALLOWED)
                 .body(new VndErrors.VndError("Method not allowed","Seul un match qui était prévu ou en pause peut être (re)lancé, or celui-ci est "+match.getStatus()+"."));
     }
-    @PutMapping("/match/{id}/reporte")
+
+    @RequestMapping(value = "/match/{id}/reporte", method = PUT, produces = MediaType.APPLICATION_JSON_VALUE) //@PutMapping("/match/{id}/reporte")
     ResponseEntity<ResourceSupport> reporte(@PathVariable Long id){
         Match match = matchRepository.findById(id).orElseThrow(()->new MatchNotFoundException(id));
         if(match.getStatus()==Status.PREVU){

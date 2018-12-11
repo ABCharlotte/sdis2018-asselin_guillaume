@@ -13,7 +13,8 @@ import java.util.ArrayList;
 //@XmlRootElement //to RESTful
 public class Competition {
     private @Id @GeneratedValue Long id;
-    public ListEquipes equipes_participantes;
+    /*public ListEquipes equipes_participantes;*/
+    public ArrayList<Long> EquipesIds; 
     public String name;
     public ArrayList<Equipe> classement;
 
@@ -22,9 +23,11 @@ public class Competition {
     /*public Competition(String name_compet, Equipe dom, Equipe participant1){
         this.equipes_participantes.put(dom);
         this.equipes_participantes.put(participant1);*/
+    
     public Competition(String name_compet){
         this.name=name_compet;
-        this.equipes_participantes= new ListEquipes();
+        /*this.equipes_participantes= new ListEquipes();*/
+        this.EquipesIds= new ArrayList<Long>();
         this.classement= new ArrayList<Equipe>();
     }
 
@@ -48,22 +51,33 @@ public class Competition {
         return id;
     }
 
-    public ListEquipes getEquipes() {
-        return equipes_participantes;
+    public ArrayList<Long> getEquipesIds(){
+        return EquipesIds;
+    }
+    
+    public void setEquipesIds(ArrayList<Long> listIdsEquipes){
+        this.EquipesIds = listIdsEquipes;
+    }
+    /*public ListEquipes getEquipes() {
+        return equipes_participantes.getEquipes();
+        //return equipes_participantes;
     }
 
+     public void setEquipes(ListEquipes equipes_participantes) {
+        this.equipes_participantes = equipes_participantes;
+    }*/
+    
     public ArrayList<Equipe> getClassement() {
         return classement;
     }
 
-    public void setEquipes(ListEquipes equipes_participantes) {
-        this.equipes_participantes = equipes_participantes;
-    }
     public void addEquipe(Equipe newEquipe) {
-        this.equipes_participantes.put(newEquipe);
+        /*this.equipes_participantes.put(newEquipe);*/
+        this.EquipesIds.add(newEquipe.getId());
     }
 
-    public void setClassement(ArrayList<Equipe> classement) {
+    /*public void setClassement(ArrayList<Equipe> classement) {
         this.classement = classement;
-    }
+    }*/
+    
 }

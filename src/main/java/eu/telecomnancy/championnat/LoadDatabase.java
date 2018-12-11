@@ -11,32 +11,49 @@ import sun.security.krb5.internal.ccache.CredentialsCache;
 class LoadDatabase {
 
     @Bean
-    CommandLineRunner initDatabase(CompetitionRepository repository, MatchRepository matchRepository){
-        Competition maCompet= new Competition("JIG");
-        Equipe iss = new Equipe("ISS");
-        Equipe il = new Equipe("IL");
-        maCompet.addEquipe(iss);
-        maCompet.addEquipe(il);
-        Equipe nancy = new Equipe("Nancy");
-        Equipe laxou = new Equipe("Laxou");
+    CommandLineRunner initDatabase(CompetitionRepository repository, MatchRepository matchRepository, EquipeRepository equipeRepository){
+
 
         return args -> {
-            //log.info("Preloading"+repository.save(new Competition("CoupeEst", new ArrayList<Equipes>(new Equipes("France"),new Equipes("Belgique"),new Equipes("Luxembourg") ) ) ));
-            /*log.info("Preloading"+repository.save(new Competition("CoupeEst", new ListEquipes().put(new Equipe("France")).put(new Equipe("Belgique")).put(new Equipe("Luxembourg")) )));
-            log.info("Preloading"+repository.save(new Competition("RegionNancy", new ListEquipes().put(new Equipe("Nancy")).put(new Equipe("Laxou")).put(new Equipe("Villers")).put(new Equipe("Vandoeuvre")) )));
-            */
-            /*log.info("Preloading"+repository.save(new Competition("CoupeEst", new Equipe("France"), new Equipe("Belgique") ) ));
-            log.info("Preloading"+repository.save(new Competition("RegionNancy", new Equipe("Laxou"), new Equipe("Villers") ) ));*/
-            log.info("Preloading"+repository.save(maCompet));
-            log.info("Preloading"+repository.save(new Competition("CoupeEst") ));
-            log.info("Preloading"+repository.save(new Competition("RegionNancy") ));
 
+            Equipe iss = new Equipe("ISS");
+            Equipe il = new Equipe("IL");
+            log.info("Preloading"+equipeRepository.save(iss));
+            log.info("Preloading"+equipeRepository.save(il));
+            Competition maCompet= new Competition("JIG");
+            maCompet.addEquipe(iss);
+            maCompet.addEquipe(il);
+            log.info("Preloading"+repository.save(maCompet));
             matchRepository.save(new Match(il, iss,Status.EN_COURS, "02/09/18, 10:11"));
-            matchRepository.save(new Match(nancy,laxou));
+
+            Equipe equipe1 = new Equipe("Nancy");
+            Equipe equipe2 = new Equipe("Laxou");
+            log.info("Preloading"+equipeRepository.save(equipe1));
+            log.info("Preloading"+equipeRepository.save(equipe2));
+            matchRepository.save(new Match(equipe1, equipe2));
+            Competition Compet= new Competition("RegionNancy");
+            Compet.addEquipe(equipe1);
+            Compet.addEquipe(equipe2);
+            equipe1 = new Equipe("Villers");
+            log.info("Preloading"+equipeRepository.save(equipe1));
+            Compet.addEquipe(equipe1);
+            equipe1 = new Equipe("Vandoeuvre");
+            log.info("Preloading"+equipeRepository.save(equipe1));
+            Compet.addEquipe(equipe1);
+            //log.info("Preloading"+repository.save(new Competition("RegionNancy") ));
+            log.info("Preloading"+repository.save(Compet));
+
+
+            //log.info("Preloading"+repository.save(new Competition("CoupeEst", new ArrayList<Equipes>(new Equipes("France"),new Equipes("Belgique"),new Equipes("Luxembourg") ) ) ));
+            log.info("Preloading"+repository.save(new Competition("CoupeEst") ));
+
 
             matchRepository.findAll().forEach(match -> {
                 log.info("Preloaded " + match);
             });
+            /*equipeRepository.findAll().forEach(equipe -> {
+                log.info("Preloaded " + equipe);
+            });*/
         };
 
 

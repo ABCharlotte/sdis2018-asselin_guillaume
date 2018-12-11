@@ -48,7 +48,8 @@ public class Match {
         new Match(domicile,exterieur,Status.PREVU,"jj/MM/AA, hh:mm");//formatDate.format(new Date()));
     }
     Match(){
-        new Match(null, null);
+        Equipe anonymous = new Equipe("??");
+        new Match(anonymous, anonymous);
     }
 
 
