@@ -57,7 +57,7 @@ public class MatchController {
 
     //EN COURS --> PAUSE, FINI
     // PREVU --> EN_COURS, REPORTE, ANNULE;
-    @DeleteMapping("/match/{id}/annule")
+    @DeleteMapping("/matches/{id}/annule")
     ResponseEntity<ResourceSupport> annule(@PathVariable Long id){
         Match match = matchRepository.findById(id).orElseThrow(()->new MatchNotFoundException(id));
         if(match.getStatus()==Status.PREVU){
@@ -69,7 +69,7 @@ public class MatchController {
                 .body(new VndErrors.VndError("Method not allowed","Vous ne pouvez pas annuler un match déjà démarré ou fini, or celui-ci est "+match.getStatus()+"."));
     }
 
-    @RequestMapping(value = "/match/{id}/pause", method = PUT, produces = MediaType.APPLICATION_JSON_VALUE) //@PutMapping("/match/{id}/pause")
+    @RequestMapping(value = "/matches/{id}/pause", method = GET, produces = MediaType.APPLICATION_JSON_VALUE) //@PutMapping("/match/{id}/pause")
     ResponseEntity<ResourceSupport> pause(@PathVariable Long id){
         Match match = matchRepository.findById(id).orElseThrow(()->new MatchNotFoundException(id));
         if(match.getStatus()==Status.EN_COURS){
@@ -81,7 +81,7 @@ public class MatchController {
                 .body(new VndErrors.VndError("Method not allowed","Vous ne pouvez pas mettre en pause un match qui n'est pas en cours, or celui-ci est "+match.getStatus()+"."));
     }
 
-    @RequestMapping(value = "/match/{id}/fini", method = PUT, produces = MediaType.APPLICATION_JSON_VALUE) //@PutMapping("/match/{id}/fini")
+    @RequestMapping(value = "/matches/{id}/fini", method = GET, produces = MediaType.APPLICATION_JSON_VALUE) //@PutMapping("/match/{id}/fini")
     ResponseEntity<ResourceSupport> fini(@PathVariable Long id){
         Match match = matchRepository.findById(id).orElseThrow(()->new MatchNotFoundException(id));
         if(match.getStatus()==Status.EN_COURS){
@@ -93,7 +93,7 @@ public class MatchController {
                 .body(new VndErrors.VndError("Method not allowed","Seul un match en cours pour être considéré comme fini, or celui-ci est "+match.getStatus()+"."));
     }
 
-    @RequestMapping(value = "/match/{id}/en_cours", method = PUT, produces = MediaType.APPLICATION_JSON_VALUE) //@PutMapping("/match/{id}/en_cours")
+    @RequestMapping(value = "/matches/{id}/en_cours", method = GET, produces = MediaType.APPLICATION_JSON_VALUE) //@PutMapping("/match/{id}/en_cours")
     ResponseEntity<ResourceSupport> enCours(@PathVariable Long id){
         Match match = matchRepository.findById(id).orElseThrow(()->new MatchNotFoundException(id));
         if(match.getStatus()==Status.PREVU || match.getStatus()==Status.PAUSE){
@@ -105,7 +105,7 @@ public class MatchController {
                 .body(new VndErrors.VndError("Method not allowed","Seul un match qui était prévu ou en pause peut être (re)lancé, or celui-ci est "+match.getStatus()+"."));
     }
 
-    @RequestMapping(value = "/match/{id}/reporte", method = PUT, produces = MediaType.APPLICATION_JSON_VALUE) //@PutMapping("/match/{id}/reporte")
+    @RequestMapping(value = "/matches/{id}/reporte", method = GET, produces = MediaType.APPLICATION_JSON_VALUE) //@PutMapping("/match/{id}/reporte")
     ResponseEntity<ResourceSupport> reporte(@PathVariable Long id){
         Match match = matchRepository.findById(id).orElseThrow(()->new MatchNotFoundException(id));
         if(match.getStatus()==Status.PREVU){
