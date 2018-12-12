@@ -10,6 +10,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static eu.telecomnancy.championnat.Competition.*;
+
 enum Status {
     PREVU,
     EN_COURS,
@@ -31,9 +33,21 @@ public class Match {
     //public final SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yy, h:mm");
     private String date;
 
+    private  Long competitionId;
+
 
     private int scoreDom;
     private int scoreGuest;
+
+    Match(Equipe domicile, Equipe exterieur, Status state, Competition compet) {
+        this.domicile=domicile;
+        this.exterieur=exterieur;
+        this.scoreDom=0;
+        this.scoreGuest=0;
+        this.status=state;
+        this.date=date;
+        this.competitionId=compet.getId();
+    }
 
     Match(Equipe domicile, Equipe exterieur, Status state, String date) {
         this.domicile=domicile;
@@ -42,6 +56,7 @@ public class Match {
         this.scoreGuest=0;
         this.status=state;
         this.date=date;
+        this.competitionId=null;
     }
 
     Match(Equipe domicile, Equipe exterieur) {
@@ -51,6 +66,7 @@ public class Match {
         this.scoreGuest=0;
         this.status=Status.PREVU;
         this.date="jj/MM/AA, hh:mm";
+        this.competitionId=null;
     }
     Match(){
         Equipe anonymous = new Equipe("??");
@@ -63,8 +79,20 @@ public class Match {
         return status;
     }
 
-    public void setStatus(Status status) {
-        this.status = status;
+    public void setStatus(Status newStatus) {
+
+        this.status = newStatus;
+        /*if (competitionId != null) {
+            Competition compet = findById(competitionId);
+            if (newStatus == Status.FINI) {
+                if (scoreDom > scoreGuest) {
+
+                    compet.majClassement(this.domicile, this.exterieur, Boolean.FALSE);
+                }else{
+                    compet.majClassement(this.exterieur, this.domicile, scoreDom==scoreGuest);
+                }
+            }
+        }*/
     }
 
     public int getScoreDom() {

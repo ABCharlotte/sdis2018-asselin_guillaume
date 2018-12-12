@@ -16,16 +16,17 @@ import java.util.stream.Collectors;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.PUT;
 
 @RestController
 public class MatchController {
     private final MatchRepository matchRepository;
     private final MatchResourceAssembler assembler;
+    private final CompetitionRepository competRepository;
 
-    MatchController(MatchRepository matchRepository, MatchResourceAssembler assembler) {
+    MatchController(MatchRepository matchRepository, MatchResourceAssembler assembler, CompetitionRepository competRepository1) {
         this.matchRepository = matchRepository;
         this.assembler = assembler;
+        this.competRepository = competRepository1;
     }
 
     @RequestMapping(value = "/matches", method = GET, produces = MediaType.APPLICATION_JSON_VALUE) //@GetMapping("/competitions")
@@ -86,6 +87,15 @@ public class MatchController {
         Match match = matchRepository.findById(id).orElseThrow(()->new MatchNotFoundException(id));
         if(match.getStatus()==Status.EN_COURS){
             match.setStatus(Status.FINI);
+
+            if (match.getCompetitionId()!=null){
+                Competition compet = competRepository.findById(match.getCompetitionId()).orElseThrow(()->new MatchNotFoundException(match.getCompetitionId()));
+                if (match.getScoreDom() > match.getScoreGuest()) {
+                    compet.majClassement(match.getDomicile(), match.getExterieur(), Boolean.FALSE);
+                } else {
+                    compet.majClassement(match.getExterieur(), match.getDomicile(), match.getScoreDom() == match.getScoreGuest());
+                }
+            }
             return ResponseEntity.ok(assembler.toResource(matchRepository.save(match)));
         }
         return ResponseEntity

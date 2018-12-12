@@ -86,6 +86,7 @@ public class CompetitionController {
                 .map(competition -> {
                     competition.setName(newCompetition.getName());
                     competition.setEquipesIds(newCompetition.getEquipesIds());
+                    competition.setClassement(newCompetition.getClassement());
                     return repository.save(competition);
                 })
                 .orElseGet(() -> {
