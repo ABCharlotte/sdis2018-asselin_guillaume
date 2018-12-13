@@ -19,20 +19,21 @@ public class Worker {
         System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
 
         channel.basicQos(1);
-
+        while(true){
         DeliverCallback deliverCallback = (consumerTag, delivery) -> {
             String message = new String(delivery.getBody(), "UTF-8");
+            java.util.Date date = new java.util.Date();
 
-            System.out.println(" [x] Received '" + message + "'");
+            System.out.println(date+" : "+ message);
             try {
                 doWork(message);
             } finally {
-                System.out.println(" [x] Done");
+                //System.out.println(" [x] Done");
                 channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);
             }
         };
         channel.basicConsume(TASK_QUEUE_NAME, false, deliverCallback, consumerTag -> { });
-    }
+    }}
 
     private static void doWork(String task) {
         for (char ch : task.toCharArray()) {

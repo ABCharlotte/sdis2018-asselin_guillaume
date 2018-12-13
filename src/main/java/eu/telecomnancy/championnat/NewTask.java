@@ -1,4 +1,4 @@
-package eu.telecomnancy.championnat.hello;
+package eu.telecomnancy.championnat;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;

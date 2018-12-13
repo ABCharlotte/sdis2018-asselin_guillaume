@@ -45,6 +45,11 @@ public class EquipeController {
     @PostMapping("/equipes")
     ResponseEntity<?> newEquipe(@RequestBody Equipe newEquipe) throws URISyntaxException {
         Resource<Equipe> resource = assembler.toResource(repository.save(newEquipe));
+        try {
+            new NewTask().main(new String[]{newEquipe.getId().toString(),newEquipe.getName()});
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return ResponseEntity
                 .created(new URI(resource.getId().expand().getHref()))
                 .body(resource);
