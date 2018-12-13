@@ -45,7 +45,12 @@ public class Match {
     }
 
     Match(Equipe domicile, Equipe exterieur) {
-        new Match(domicile,exterieur,Status.PREVU,"jj/MM/AA, hh:mm");//formatDate.format(new Date()));
+        this.domicile=domicile;
+        this.exterieur=exterieur;
+        this.scoreDom=0;
+        this.scoreGuest=0;
+        this.status=Status.PREVU;
+        this.date="jj/MM/AA, hh:mm";
     }
     Match(){
         Equipe anonymous = new Equipe("??");
