@@ -26,8 +26,12 @@ enum Status {
 @Table(name = "MATCHES")
 public class Match {
     private @Id @GeneratedValue Long id;
-    private Equipe domicile;
-    private Equipe exterieur;
+    /*private Equipe domicile;
+    private Equipe exterieur;*/
+    private String equipeDomicileName;
+    private Long equipeDomicileId;
+    private String equipeInviteName;
+    private Long equipeInviteId;
 
     private Status status;
     //public final SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yy, h:mm");
@@ -36,34 +40,45 @@ public class Match {
     private  Long competitionId;
 
 
-    private int scoreDom;
-    private int scoreGuest;
+    private int equipeDomicileScore;
+    private int equipeInviteScore;
 
     Match(Equipe domicile, Equipe exterieur, Status state, Competition compet) {
-        this.domicile=domicile;
-        this.exterieur=exterieur;
-        this.scoreDom=0;
-        this.scoreGuest=0;
+        /*this.domicile=domicile;
+        this.exterieur=exterieur;*/
+        this.equipeDomicileId=domicile.getId();
+        this.equipeDomicileName=domicile.getName();
+        this.equipeInviteId=exterieur.getId();
+        this.equipeInviteName=exterieur.getName();
+        this.equipeDomicileScore=0;
+        this.equipeInviteScore=0;
         this.status=state;
-        this.date=date;
         this.competitionId=compet.getId();
     }
 
     Match(Equipe domicile, Equipe exterieur, Status state, String date) {
-        this.domicile=domicile;
-        this.exterieur=exterieur;
-        this.scoreDom=0;
-        this.scoreGuest=0;
+        /*this.domicile=domicile;
+        this.exterieur=exterieur;*/
+        this.equipeDomicileId=domicile.getId();
+        this.equipeDomicileName=domicile.getName();
+        this.equipeInviteId=exterieur.getId();
+        this.equipeInviteName=exterieur.getName();
+        this.equipeDomicileScore=0;
+        this.equipeInviteScore=0;
         this.status=state;
         this.date=date;
         this.competitionId=null;
     }
 
     Match(Equipe domicile, Equipe exterieur) {
-        this.domicile=domicile;
-        this.exterieur=exterieur;
-        this.scoreDom=0;
-        this.scoreGuest=0;
+        /*this.domicile=domicile;
+        this.exterieur=exterieur;*/
+        this.equipeDomicileId=domicile.getId();
+        this.equipeDomicileName=domicile.getName();
+        this.equipeInviteId=exterieur.getId();
+        this.equipeInviteName=exterieur.getName();
+        this.equipeDomicileScore=0;
+        this.equipeInviteScore=0;
         this.status=Status.PREVU;
         this.date="jj/MM/AA, hh:mm";
         this.competitionId=null;
@@ -95,20 +110,20 @@ public class Match {
         }*/
     }
 
-    public int getScoreDom() {
-        return scoreDom;
+    public int getEquipeDomicileScore() {
+        return equipeDomicileScore;
     }
 
-    public void setScoreDom(int scoreDom) {
-        this.scoreDom = scoreDom;
+    public void setEquipeDomicileScore(int scoreDom) {
+        this.equipeDomicileScore = scoreDom;
     }
 
-    public int getScoreGuest() {
-        return scoreGuest;
+    public int getEquipeInviteScore() {
+        return equipeInviteScore;
     }
 
-    public void setScoreGuest(int scoreGuest) {
-        this.scoreGuest = scoreGuest;
+    public void setEquipeInviteScore(int scoreGuest) {
+        this.equipeInviteScore = scoreGuest;
     }
 
 
@@ -118,5 +133,39 @@ public class Match {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public void setEquipeDom(Equipe domicile){
+        this.equipeDomicileId=domicile.getId();
+        this.equipeDomicileName=domicile.getName();
+    }
+
+    public void setEquipeGuest(Equipe exterieur) {
+        this.equipeInviteId = exterieur.getId();
+        this.equipeInviteName = exterieur.getName();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getEquipeDomicileName() {
+        return equipeDomicileName;
+    }
+
+    public Long getEquipeDomicileId() {
+        return equipeDomicileId;
+    }
+
+    public String getEquipeInviteName() {
+        return equipeInviteName;
+    }
+
+    public Long getEquipeInviteId() {
+        return equipeInviteId;
+    }
+
+    public Long getCompetitionId() {
+        return competitionId;
     }
 }

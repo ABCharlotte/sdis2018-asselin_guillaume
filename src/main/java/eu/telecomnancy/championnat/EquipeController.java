@@ -69,6 +69,7 @@ public class EquipeController {
         Equipe updatedEquipe = repository.findById(id)
                 .map(equipe -> {
                     equipe.setName(newEquipe.getName());
+                    equipe.setId(newEquipe.getId());
                     return repository.save(equipe);
                 })
                 .orElseGet(() -> {

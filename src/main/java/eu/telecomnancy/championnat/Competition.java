@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 //import javax.xml.bind.annotation.XmlRootElement;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -77,9 +78,9 @@ public class Competition {
         this.classement.add(0);
     }
 
-    public void majClassement(Equipe gagant, Equipe perdant, Boolean egalite){
-        Long gagantId = gagant.getId();
-        Long perdantId = perdant.getId();
+    public void majClassement(Long gagantId, Long perdantId, Boolean egalite){
+        System.out.println("Change classement" +classement);
+        System.out.println("équipe"+gagantId);
         /*if (! classement.containsKey(gagantId)){
             this.addEquipe(gagant);
         }
@@ -92,25 +93,37 @@ public class Competition {
             classement.put(gagantId, classement.get(gagantId)-1);
             classement.put(perdantId, classement.get(perdantId)+3);
         }*/
+        Boolean G = false;
+        Boolean P = false;
         for (int i=0; i<equipesIds.size();i++){
-            if (gagantId == equipesIds.get(i)){
-                if (egalite){
-                    classement.set(i, classement.get(i)+1);
-                }
-                else{
-                    classement.set(i, classement.get(i)+2);
-                }
+            if (gagantId.equals(equipesIds.get(i))){
+                G= true;
+                classement.set(i, classement.get(i)+2);
+                System.out.println("here "+i);
             }
-            if (perdantId == equipesIds.get(i)){
-                if (egalite){
-                    classement.set(i, classement.get(i)+1);
-                }
-                else{
-                    classement.set(i, classement.get(i)-2);
-                }
+            if (perdantId.equals(equipesIds.get(i))){
+                P = true;
+                classement.set(i, classement.get(i)-2);
+                System.out.println("here "+i);
             }
         }
+        if (!G) {
+            equipesIds.add(gagantId);
+            classement.add(2);
+        }
+        if (!P){
+            equipesIds.add(perdantId);
+            classement.add(-2);
+        }
+
+        if(egalite){
+            classement.set(classement.indexOf(gagantId), classement.get(gagantId.intValue())-1);
+            classement.set(classement.indexOf(perdantId), classement.get(perdantId.intValue())+3);
+        }
+
+        System.out.println("Classement changé " +classement);
     }
+
     /*public void setClassement(ArrayList<Equipe> classement) {
         this.classement = classement;
     }*/

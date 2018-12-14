@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.Resources;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -56,6 +58,23 @@ public class MatchController {
                 .body(assembler.toResource(newMatch));
     }
 
+    @PutMapping("/matches/{id}")
+    ResponseEntity<?> replaceMatch(@RequestBody Match newMatch, @PathVariable Long id) throws URISyntaxException {
+        Match updatedMatch = matchRepository.findById(id)
+                .map(match -> {
+                    match.setId(newMatch.getId());
+                    return matchRepository.save(match);
+                })
+                .orElseGet(() -> {
+                    newMatch.setId(id);
+                    return matchRepository.save(newMatch);
+                });
+        Resource<Match> resource = assembler.toResource(updatedMatch);
+        return ResponseEntity
+                .created(new URI(resource.getId().expand().getHref()))
+                .body(resource);
+    }
+
     //EN COURS --> PAUSE, FINI
     // PREVU --> EN_COURS, REPORTE, ANNULE;
     @DeleteMapping("/matches/{id}/annule")
@@ -89,12 +108,14 @@ public class MatchController {
             match.setStatus(Status.FINI);
 
             if (match.getCompetitionId()!=null){
+                System.out.println("Boucle");
                 Competition compet = competRepository.findById(match.getCompetitionId()).orElseThrow(()->new MatchNotFoundException(match.getCompetitionId()));
-                if (match.getScoreDom() > match.getScoreGuest()) {
-                    compet.majClassement(match.getDomicile(), match.getExterieur(), Boolean.FALSE);
+                if (match.getEquipeDomicileScore() > match.getEquipeDomicileScore()) {
+                    compet.majClassement(match.getEquipeDomicileId(), match.getEquipeInviteId(), Boolean.FALSE);
                 } else {
-                    compet.majClassement(match.getExterieur(), match.getDomicile(), match.getScoreDom() == match.getScoreGuest());
+                    compet.majClassement(match.getEquipeInviteId(), match.getEquipeDomicileId(), match.getEquipeDomicileScore() == match.getEquipeInviteScore());
                 }
+                competRepository.save(compet);
             }
             return ResponseEntity.ok(assembler.toResource(matchRepository.save(match)));
         }
