@@ -46,7 +46,7 @@ public class EquipeController {
     ResponseEntity<?> newEquipe(@RequestBody Equipe newEquipe) throws URISyntaxException {
         Resource<Equipe> resource = assembler.toResource(repository.save(newEquipe));
         try {
-            new NewTask().main(new String[]{newEquipe.getId().toString(),newEquipe.getName()});
+            new EmitLog().main(new String[]{newEquipe.getId().toString(),newEquipe.getName()},newEquipe.getName());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -71,6 +71,11 @@ public class EquipeController {
 
     @PutMapping("/equipes/{id}")
     ResponseEntity<?> replaceEquipe(@RequestBody Equipe newEquipe, @PathVariable Long id) throws URISyntaxException {
+        try {
+            new EmitLog().main(new String[]{newEquipe.getId().toString(),newEquipe.getName()},newEquipe.getName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         Equipe updatedEquipe = repository.findById(id)
                 .map(equipe -> {
                     equipe.setName(newEquipe.getName());
@@ -88,7 +93,13 @@ public class EquipeController {
 
     @DeleteMapping("/equipes/{id}")
     ResponseEntity<?> deleteEquipe(@PathVariable Long id) {
+        //String name = repository.findById(id).getName;
         repository.deleteById(id);
+        try {
+            new EmitLog().main(new String[]{"Equipes id:"+id+" deleted"},name);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return ResponseEntity.noContent().build();
     }
 }
