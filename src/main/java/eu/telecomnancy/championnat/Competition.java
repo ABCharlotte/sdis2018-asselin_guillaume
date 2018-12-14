@@ -82,32 +82,34 @@ public class Competition {
 
     public void majClassement(Long gagantId, Long perdantId, Boolean egalite, Long matchId){
         this.matchesFinisId.add(matchId);
-        Boolean G = false;
-        Boolean P = false;
+        int G = -1;
+        int P = -1;
         for (int i=0; i<equipesIds.size();i++){
             if (gagantId.equals(equipesIds.get(i))){
-                G= true;
+                G= i;
                 classement.set(i, classement.get(i)+2);
                 //System.out.println("here "+i);
             }
             if (perdantId.equals(equipesIds.get(i))){
-                P = true;
+                P = i;
                 classement.set(i, classement.get(i)-2);
                 //System.out.println("here "+i);
             }
         }
-        if (!G) {
+        if (G==-1) {
             equipesIds.add(gagantId);
             classement.add(2);
+            G=equipesIds.indexOf(gagantId);
         }
-        if (!P){
+        if (P==-1){
             equipesIds.add(perdantId);
             classement.add(-2);
+            P=equipesIds.indexOf(perdantId);
         }
 
         if(egalite){
-            classement.set(classement.indexOf(gagantId), classement.get(gagantId.intValue())-1);
-            classement.set(classement.indexOf(perdantId), classement.get(perdantId.intValue())+3);
+            classement.set(G, classement.get(G)-1);
+            classement.set(P, classement.get(P)+3);
         }
 
         //System.out.println("Classement changé " +classement);

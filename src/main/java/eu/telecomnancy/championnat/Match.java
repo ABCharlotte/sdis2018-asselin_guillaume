@@ -43,7 +43,7 @@ public class Match {
     private int equipeDomicileScore;
     private int equipeInviteScore;
 
-    Match(Equipe domicile, Equipe exterieur, Status state, Competition compet) {
+    Match(Equipe domicile, Equipe exterieur, Status state, String date, Long competId/*Competition compet*/) {
         /*this.domicile=domicile;
         this.exterieur=exterieur;*/
         this.equipeDomicileId=domicile.getId();
@@ -53,7 +53,8 @@ public class Match {
         this.equipeDomicileScore=0;
         this.equipeInviteScore=0;
         this.status=state;
-        this.competitionId=compet.getId();
+        this.date=date;
+        this.competitionId=competId;//compet.getId();
     }
 
     Match(Equipe domicile, Equipe exterieur, Status state, String date) {

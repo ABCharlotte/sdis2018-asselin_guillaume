@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -102,5 +103,17 @@ public class EquipeController {
             e.printStackTrace();
         }
         return ResponseEntity.noContent().build();
+    }
+
+
+    //@RequestMapping(value = "/equipes", method = GET, produces = MediaType.APPLICATION_JSON_VALUE)
+        //@GetMapping("/equipes")
+    List<Resource<Equipe>>  allOne(ArrayList<Long> equipesIds) {
+        List<Resource<Equipe>> equipes = repository.findAllById(equipesIds).stream()
+                .map(assembler::toResource)
+                .collect(Collectors.toList());
+
+        return equipes; /*,
+                linkTo(methodOn(EquipeController.class).all(equipesIds)).withRel("equipesParticipantes")*///);
     }
 }

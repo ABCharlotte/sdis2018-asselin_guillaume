@@ -49,6 +49,13 @@ public class MatchResourceAssembler implements ResourceAssembler<Match, Resource
                             .enCours(match.getId())).withRel("en_cours"));
         }
 
+        matchResource.add(linkTo(methodOn(EquipeController.class).one(match.getEquipeDomicileId())).withRel("EquipeADomicile"));
+        matchResource.add(linkTo(methodOn(EquipeController.class).one(match.getEquipeInviteId())).withRel("EquipeDeExterieur"));
+
+        if(match.getCompetitionId()!=null){
+            matchResource.add(linkTo(methodOn(CompetitionController.class).one(match.getCompetitionId())).withRel("Competition associee"));
+        }
+
         return matchResource;
     }
 }

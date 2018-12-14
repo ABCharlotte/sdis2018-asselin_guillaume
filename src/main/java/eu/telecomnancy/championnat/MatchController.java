@@ -114,6 +114,7 @@ public class MatchController {
                     compet.majClassement(match.getEquipeDomicileId(), match.getEquipeInviteId(), Boolean.FALSE, match.getId());
                 } else {
                     compet.majClassement(match.getEquipeInviteId(), match.getEquipeDomicileId(), match.getEquipeDomicileScore() == match.getEquipeInviteScore(), match.getId());
+                    System.out.println("here");
                 }
                 competRepository.save(compet);
             }

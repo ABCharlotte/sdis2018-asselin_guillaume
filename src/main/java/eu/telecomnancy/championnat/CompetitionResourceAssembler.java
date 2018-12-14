@@ -13,10 +13,23 @@ class CompetitionResourceAssembler implements ResourceAssembler<Competition, Res
     @Override
     public Resource<Competition> toResource(Competition competition) {
 
-        return new Resource<>(competition,
+        Resource res = new Resource<>(competition,
                 linkTo(methodOn(CompetitionController.class).one(competition.getId())).withSelfRel(),
                 linkTo(methodOn(CompetitionController.class).all()).withRel("competitions")/*,
-                linkTo(methodOn(EquipeController.class).one(competition.equipesIds[]))*/
+
+                linkTo(methodOn(EquipeController.class).allOne(competition.getEquipesIds())).withRel("equipesParticipantes")*/
         );
+        //int n=1;
+        for (Long i : competition.getEquipesIds()){
+            res.add(linkTo(methodOn(EquipeController.class).one(i)).withRel("EquipeParticipantes "+i));
+            //n+=1;
+        }
+        //n=1;
+        for (Long i : competition.getMatchesFinisId()){
+            res.add(linkTo(methodOn(MatchController.class).one(i)).withRel("Matchs Finis "+i));
+            //n+=1;
+        }
+
+        return res;
     }
 }

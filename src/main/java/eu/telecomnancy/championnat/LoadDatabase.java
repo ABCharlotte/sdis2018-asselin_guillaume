@@ -23,7 +23,7 @@ class LoadDatabase {
             maCompet.addEquipe(iss);
             maCompet.addEquipe(il);
             log.info("Preloading"+repository.save(maCompet));
-            matchRepository.save(new Match(il, iss,Status.EN_COURS, "02/09/18, 10:11"));
+            matchRepository.save(new Match(il, iss,Status.EN_COURS, "02/09/18, 10:11", maCompet.getId()));
 
             Equipe equipe1 = new Equipe("Nancy");
             Equipe equipe2 = new Equipe("Laxou");
