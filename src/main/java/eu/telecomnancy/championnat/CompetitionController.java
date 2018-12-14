@@ -6,15 +6,14 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
-
-import java.net.URI;
-import java.net.URISyntaxException;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 
 @RestController
@@ -41,7 +40,8 @@ public class CompetitionController {
         return new Resources<>(competitions,
                 linkTo(methodOn(CompetitionController.class).all()).withSelfRel());
     }/*@GetMapping("/competitions")
-    Resources<Resource<Competition>> all() {
+    Resources<Resource<Competition>> all()
+     {
 
         List<Resource<Competition>> competitions = repository.findAll().stream()
                 .map(competition -> new Resource<>(competition,
