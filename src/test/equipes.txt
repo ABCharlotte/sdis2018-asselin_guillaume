@@ -1,0 +1,70 @@
+{
+  "_embedded" : {
+    "equipes" : [ {
+      "name" : "ISS",
+      "_links" : {
+        "self" : {
+          "href" : "http://localhost:8080/equipes/1"
+        },
+        "equipes" : {
+          "href" : "http://localhost:8080/equipes"
+        }
+      }
+    }, {
+      "name" : "IL",
+      "_links" : {
+        "self" : {
+          "href" : "http://localhost:8080/equipes/2"
+        },
+        "equipes" : {
+          "href" : "http://localhost:8080/equipes"
+        }
+      }
+    }, {
+      "name" : "Nancy",
+      "_links" : {
+        "self" : {
+          "href" : "http://localhost:8080/equipes/5"
+        },
+        "equipes" : {
+          "href" : "http://localhost:8080/equipes"
+        }
+      }
+    }, {
+      "name" : "Laxou",
+      "_links" : {
+        "self" : {
+          "href" : "http://localhost:8080/equipes/6"
+        },
+        "equipes" : {
+          "href" : "http://localhost:8080/equipes"
+        }
+      }
+    }, {
+      "name" : "Villers",
+      "_links" : {
+        "self" : {
+          "href" : "http://localhost:8080/equipes/8"
+        },
+        "equipes" : {
+          "href" : "http://localhost:8080/equipes"
+        }
+      }
+    }, {
+      "name" : "Vandoeuvre",
+      "_links" : {
+        "self" : {
+          "href" : "http://localhost:8080/equipes/9"
+        },
+        "equipes" : {
+          "href" : "http://localhost:8080/equipes"
+        }
+      }
+    } ]
+  },
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8080/equipes"
+    }
+  }
+}

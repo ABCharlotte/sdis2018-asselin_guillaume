@@ -1,0 +1,76 @@
+{
+  "_embedded" : {
+    "matches" : [ {
+      "equipeDomicileName" : "IL",
+      "equipeDomicileId" : 2,
+      "equipeInviteName" : "ISS",
+      "equipeInviteId" : 1,
+      "status" : "EN_COURS",
+      "date" : "02/09/18, 10:11",
+      "competitionId" : 3,
+      "equipeDomicileScore" : 0,
+      "equipeInviteScore" : 0,
+      "_links" : {
+        "self" : {
+          "href" : "http://localhost:8080/matches/4"
+        },
+        "matches" : {
+          "href" : "http://localhost:8080/matches"
+        },
+        "fini" : {
+          "href" : "http://localhost:8080/matches/4/fini"
+        },
+        "pause" : {
+          "href" : "http://localhost:8080/matches/4/pause"
+        },
+        "EquipeADomicile" : {
+          "href" : "http://localhost:8080/equipes/2"
+        },
+        "EquipeDeExterieur" : {
+          "href" : "http://localhost:8080/equipes/1"
+        },
+        "Competition associee" : {
+          "href" : "http://localhost:8080/competitions/3"
+        }
+      }
+    }, {
+      "equipeDomicileName" : "Nancy",
+      "equipeDomicileId" : 5,
+      "equipeInviteName" : "Laxou",
+      "equipeInviteId" : 6,
+      "status" : "PREVU",
+      "date" : "jj/MM/AA, hh:mm",
+      "competitionId" : null,
+      "equipeDomicileScore" : 0,
+      "equipeInviteScore" : 0,
+      "_links" : {
+        "self" : {
+          "href" : "http://localhost:8080/matches/7"
+        },
+        "matches" : {
+          "href" : "http://localhost:8080/matches"
+        },
+        "en_cours" : {
+          "href" : "http://localhost:8080/matches/7/en_cours"
+        },
+        "reporte" : {
+          "href" : "http://localhost:8080/matches/7/reporte"
+        },
+        "annule" : {
+          "href" : "http://localhost:8080/matches/7/annule"
+        },
+        "EquipeADomicile" : {
+          "href" : "http://localhost:8080/equipes/5"
+        },
+        "EquipeDeExterieur" : {
+          "href" : "http://localhost:8080/equipes/6"
+        }
+      }
+    } ]
+  },
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8080/matches"
+    }
+  }
+}
