@@ -96,7 +96,7 @@ public class EquipeController {
         //String name = repository.findById(id).getName;
         repository.deleteById(id);
         try {
-            new EmitLog().main(new String[]{"Equipes id:"+id+" deleted"},name);
+            //new EmitLog().main(new String[]{"Equipes id:"+id+" deleted"},name);
         } catch (Exception e) {
             e.printStackTrace();
         }
