@@ -94,10 +94,10 @@ public class EquipeController {
 
     @DeleteMapping("/equipes/{id}")
     ResponseEntity<?> deleteEquipe(@PathVariable Long id) {
-        //String name = repository.findById(id).getName;
+        String name = repository.findById(id).get().getName();
         repository.deleteById(id);
         try {
-            //new EmitLog().main(new String[]{"Equipes id:"+id+" deleted"},name);
+            new EmitLog().main(new String[]{"Equipes id:"+id+" deleted"},name);
         } catch (Exception e) {
             e.printStackTrace();
         }

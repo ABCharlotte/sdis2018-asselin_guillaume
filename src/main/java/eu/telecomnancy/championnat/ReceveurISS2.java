@@ -5,8 +5,8 @@ import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.DeliverCallback;
 
-public class ReceiveLogs {
-    private static final String EXCHANGE_NAME = "ISS";
+public class ReceveurISS2 {
+    private static final String EXCHANGE_NAME = "1";
 
     public static void main(String[] argv) throws Exception {
         ConnectionFactory factory = new ConnectionFactory();
