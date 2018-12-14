@@ -150,13 +150,13 @@ public class MatchController {
             match.setStatus(Status.FINI);
 
             if (match.getCompetitionId()!=null){
-                System.out.println("Boucle");
+                //System.out.println("Boucle");
                 Competition compet = competRepository.findById(match.getCompetitionId()).orElseThrow(()->new MatchNotFoundException(match.getCompetitionId()));
                 if (match.getEquipeDomicileScore() > match.getEquipeDomicileScore()) {
                     compet.majClassement(match.getEquipeDomicileId(), match.getEquipeInviteId(), Boolean.FALSE, match.getId());
                 } else {
                     compet.majClassement(match.getEquipeInviteId(), match.getEquipeDomicileId(), match.getEquipeDomicileScore() == match.getEquipeInviteScore(), match.getId());
-                    System.out.println("here");
+                    //System.out.println("here");
                 }
                 competRepository.save(compet);
             }
