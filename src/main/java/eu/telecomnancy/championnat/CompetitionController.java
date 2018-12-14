@@ -56,11 +56,14 @@ public class CompetitionController {
     @PostMapping("/competitions")
     ResponseEntity<?> newCompetition(@RequestBody Competition newCompetition) throws URISyntaxException {
         Resource<Competition> resource = assembler.toResource(repository.save(newCompetition));
-        try {
-            new NewTask().main(new String[]{newCompetition.getId().toString(),newCompetition.getName()});
-        } catch (Exception e) {
-            e.printStackTrace();
+        for (Long id : newCompetition.getEquipesIds()){
+            try {
+                new EmitLog().main(new String[]{"Your team is in: ",newCompetition.getName()},id.toString());
+                } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
+
         return ResponseEntity
                 .created(new URI(resource.getId().expand().getHref()))
                 .body(resource);
@@ -87,10 +90,12 @@ public class CompetitionController {
 
     @PutMapping("/competitions/{id}")
     ResponseEntity<?> replaceCompetition(@RequestBody Competition newCompetition, @PathVariable Long id) throws URISyntaxException{
-        try {
-            new NewTask().main(new String[]{newCompetition.getId().toString(),newCompetition.getName()});
-        } catch (Exception e) {
-            e.printStackTrace();
+        for (Long i : newCompetition.getEquipesIds()){
+            try {
+                new EmitLog().main(new String[]{"Your team is in: ",newCompetition.getName()},i.toString());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         Competition updatedCompetition = repository.findById(id)
                 .map(competition -> {
@@ -122,12 +127,15 @@ public class CompetitionController {
 
     @DeleteMapping("/competitions/{id}")
     ResponseEntity<?> deleteCompetition(@PathVariable Long id){
-        repository.deleteById(id);
-        try {
-            new NewTask().main(new String[]{"Competition id:"+id+" deleted"});
-        } catch (Exception e) {
-            e.printStackTrace();
+        for (Long i : repository.findById(id).get().getEquipesIds()){
+            try {
+                new EmitLog().main(new String[]{"Your team is in: ",repository.findById(id).get().getName()},i.toString());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
+        repository.deleteById(id);
+
         return ResponseEntity.noContent().build();
     }/*
     void deleteCompetition(@PathVariable Long id){

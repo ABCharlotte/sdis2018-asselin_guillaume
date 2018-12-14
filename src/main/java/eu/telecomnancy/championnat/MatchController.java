@@ -53,6 +53,12 @@ public class MatchController {
         match.setStatus(Status.PREVU);
         Match newMatch = matchRepository.save(match);
 
+        try {
+            new EmitLog().main(new String[]{match.getEquipeDomicileId().toString(),match.getEquipeDomicileName(),match.getStatus().toString(), String.valueOf(match.getEquipeDomicileScore()),":", String.valueOf(match.getEquipeInviteScore())},match.getEquipeDomicileId().toString());
+            new EmitLog().main(new String[]{match.getEquipeInviteId().toString(),match.getEquipeInviteName(),match.getStatus().toString(), String.valueOf(match.getEquipeInviteScore()),":", String.valueOf(match.getEquipeInviteScore())},match.getEquipeInviteId().toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return ResponseEntity
                 .created(linkTo(methodOn(MatchController.class).one(newMatch.getId())).toUri())
                 .body(assembler.toResource(newMatch));
@@ -60,13 +66,28 @@ public class MatchController {
 
     @PutMapping("/matches/{id}")
     ResponseEntity<?> replaceMatch(@RequestBody Match newMatch, @PathVariable Long id) throws URISyntaxException {
+
+
+
         Match updatedMatch = matchRepository.findById(id)
                 .map(match -> {
                     match.setId(newMatch.getId());
+                    try {
+                        new EmitLog().main(new String[]{match.getEquipeDomicileId().toString(),match.getEquipeDomicileName(),match.getStatus().toString(), String.valueOf(match.getEquipeDomicileScore()),":", String.valueOf(match.getEquipeInviteScore())},match.getEquipeDomicileId().toString());
+                        new EmitLog().main(new String[]{match.getEquipeInviteId().toString(),match.getEquipeInviteName(),match.getStatus().toString(), String.valueOf(match.getEquipeInviteScore()),":", String.valueOf(match.getEquipeInviteScore())},match.getEquipeInviteId().toString());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     return matchRepository.save(match);
                 })
                 .orElseGet(() -> {
                     newMatch.setId(id);
+                    try {
+                        new EmitLog().main(new String[]{newMatch.getEquipeDomicileId().toString(),newMatch.getEquipeDomicileName(),newMatch.getStatus().toString(), String.valueOf(newMatch.getEquipeDomicileScore()),":", String.valueOf(newMatch.getEquipeInviteScore())},newMatch.getEquipeDomicileId().toString());
+                        new EmitLog().main(new String[]{newMatch.getEquipeInviteId().toString(),newMatch.getEquipeInviteName(),newMatch.getStatus().toString(), String.valueOf(newMatch.getEquipeInviteScore()),":", String.valueOf(newMatch.getEquipeInviteScore())},newMatch.getEquipeInviteId().toString());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     return matchRepository.save(newMatch);
                 });
         Resource<Match> resource = assembler.toResource(updatedMatch);
@@ -79,6 +100,14 @@ public class MatchController {
     // PREVU --> EN_COURS, REPORTE, ANNULE;
     @DeleteMapping("/matches/{id}/annule")
     ResponseEntity<ResourceSupport> annule(@PathVariable Long id){
+
+        try {
+            new EmitLog().main(new String[]{matchRepository.findById(id).get().getEquipeDomicileId().toString(),matchRepository.findById(id).get().getEquipeDomicileName()},matchRepository.findById(id).get().getEquipeDomicileId().toString());
+            new EmitLog().main(new String[]{matchRepository.findById(id).get().getEquipeInviteId().toString(),matchRepository.findById(id).get().getEquipeInviteName()},matchRepository.findById(id).get().getEquipeDomicileId().toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         Match match = matchRepository.findById(id).orElseThrow(()->new MatchNotFoundException(id));
         if(match.getStatus()==Status.PREVU){
             match.setStatus(Status.ANNULE);
@@ -92,6 +121,12 @@ public class MatchController {
     @RequestMapping(value = "/matches/{id}/pause", method = GET, produces = MediaType.APPLICATION_JSON_VALUE) //@PutMapping("/match/{id}/pause")
     ResponseEntity<ResourceSupport> pause(@PathVariable Long id){
         Match match = matchRepository.findById(id).orElseThrow(()->new MatchNotFoundException(id));
+        try {
+            new EmitLog().main(new String[]{match.getEquipeDomicileId().toString(),match.getEquipeDomicileName(),match.getStatus().toString(), String.valueOf(match.getEquipeDomicileScore()),":", String.valueOf(match.getEquipeInviteScore())},match.getEquipeDomicileId().toString());
+            new EmitLog().main(new String[]{match.getEquipeInviteId().toString(),match.getEquipeInviteName(),match.getStatus().toString(), String.valueOf(match.getEquipeInviteScore()),":", String.valueOf(match.getEquipeInviteScore())},match.getEquipeInviteId().toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         if(match.getStatus()==Status.EN_COURS){
             match.setStatus(Status.PAUSE);
             return ResponseEntity.ok(assembler.toResource(matchRepository.save(match)));
@@ -104,6 +139,13 @@ public class MatchController {
     @RequestMapping(value = "/matches/{id}/fini", method = GET, produces = MediaType.APPLICATION_JSON_VALUE) //@PutMapping("/match/{id}/fini")
     ResponseEntity<ResourceSupport> fini(@PathVariable Long id){
         Match match = matchRepository.findById(id).orElseThrow(()->new MatchNotFoundException(id));
+        try {
+            new EmitLog().main(new String[]{match.getEquipeDomicileId().toString(),match.getEquipeDomicileName(),match.getStatus().toString(), String.valueOf(match.getEquipeDomicileScore()),":", String.valueOf(match.getEquipeInviteScore())},match.getEquipeDomicileId().toString());
+            new EmitLog().main(new String[]{match.getEquipeInviteId().toString(),match.getEquipeInviteName(),match.getStatus().toString(), String.valueOf(match.getEquipeInviteScore()),":", String.valueOf(match.getEquipeInviteScore())},match.getEquipeInviteId().toString()
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         if(match.getStatus()==Status.EN_COURS){
             match.setStatus(Status.FINI);
 
@@ -128,6 +170,12 @@ public class MatchController {
     @RequestMapping(value = "/matches/{id}/en_cours", method = GET, produces = MediaType.APPLICATION_JSON_VALUE) //@PutMapping("/match/{id}/en_cours")
     ResponseEntity<ResourceSupport> enCours(@PathVariable Long id){
         Match match = matchRepository.findById(id).orElseThrow(()->new MatchNotFoundException(id));
+        try {
+            new EmitLog().main(new String[]{match.getEquipeDomicileId().toString(),match.getEquipeDomicileName(),match.getStatus().toString(), String.valueOf(match.getEquipeDomicileScore()),":", String.valueOf(match.getEquipeInviteScore())},match.getEquipeDomicileId().toString());
+            new EmitLog().main(new String[]{match.getEquipeInviteId().toString(),match.getEquipeInviteName(),match.getStatus().toString(), String.valueOf(match.getEquipeInviteScore()),":", String.valueOf(match.getEquipeInviteScore())},match.getEquipeInviteId().toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         if(match.getStatus()==Status.PREVU || match.getStatus()==Status.PAUSE){
             match.setStatus(Status.EN_COURS);
             return ResponseEntity.ok(assembler.toResource(matchRepository.save(match)));
@@ -140,6 +188,12 @@ public class MatchController {
     @RequestMapping(value = "/matches/{id}/reporte", method = GET, produces = MediaType.APPLICATION_JSON_VALUE) //@PutMapping("/match/{id}/reporte")
     ResponseEntity<ResourceSupport> reporte(@PathVariable Long id){
         Match match = matchRepository.findById(id).orElseThrow(()->new MatchNotFoundException(id));
+        try {
+            new EmitLog().main(new String[]{match.getEquipeDomicileId().toString(),match.getEquipeDomicileName(),match.getStatus().toString(), String.valueOf(match.getEquipeDomicileScore()),":", String.valueOf(match.getEquipeInviteScore())},match.getEquipeDomicileId().toString());
+            new EmitLog().main(new String[]{match.getEquipeInviteId().toString(),match.getEquipeInviteName(),match.getStatus().toString(), String.valueOf(match.getEquipeInviteScore()),":", String.valueOf(match.getEquipeInviteScore())},match.getEquipeInviteId().toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         if(match.getStatus()==Status.PREVU){
             match.setStatus(Status.REPORTE);
             return ResponseEntity.ok(assembler.toResource(matchRepository.save(match)));
