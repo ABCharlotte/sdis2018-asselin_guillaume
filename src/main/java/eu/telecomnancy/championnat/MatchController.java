@@ -111,9 +111,9 @@ public class MatchController {
                 System.out.println("Boucle");
                 Competition compet = competRepository.findById(match.getCompetitionId()).orElseThrow(()->new MatchNotFoundException(match.getCompetitionId()));
                 if (match.getEquipeDomicileScore() > match.getEquipeDomicileScore()) {
-                    compet.majClassement(match.getEquipeDomicileId(), match.getEquipeInviteId(), Boolean.FALSE);
+                    compet.majClassement(match.getEquipeDomicileId(), match.getEquipeInviteId(), Boolean.FALSE, match.getId());
                 } else {
-                    compet.majClassement(match.getEquipeInviteId(), match.getEquipeDomicileId(), match.getEquipeDomicileScore() == match.getEquipeInviteScore());
+                    compet.majClassement(match.getEquipeInviteId(), match.getEquipeDomicileId(), match.getEquipeDomicileScore() == match.getEquipeInviteScore(), match.getId());
                 }
                 competRepository.save(compet);
             }

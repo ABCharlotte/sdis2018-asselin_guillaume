@@ -21,6 +21,7 @@ public class Competition {
     public String name;
     //public HashMap<Long, Integer> classement;   //<id de l'équipe, nb de victoires>
     public ArrayList<Integer> classement;
+    private ArrayList<Long> matchesFinisId;
     
     public Competition(String name_compet){
         this.name=name_compet;
@@ -28,6 +29,7 @@ public class Competition {
         this.equipesIds= new ArrayList<Long>();
         //this.classement= new HashMap<Long, Integer>();
         this.classement=new ArrayList<Integer>();
+        this.matchesFinisId=new ArrayList<Long>();
     }
 
     public Competition(){
@@ -78,33 +80,20 @@ public class Competition {
         this.classement.add(0);
     }
 
-    public void majClassement(Long gagantId, Long perdantId, Boolean egalite){
-        System.out.println("Change classement" +classement);
-        System.out.println("équipe"+gagantId);
-        /*if (! classement.containsKey(gagantId)){
-            this.addEquipe(gagant);
-        }
-        if (! classement.containsKey(perdantId)){
-            this.addEquipe(perdant);
-        }
-        classement.put(gagantId, classement.get(gagantId)+2);
-        classement.put(perdantId, classement.get(perdantId)-2);
-        if(egalite){
-            classement.put(gagantId, classement.get(gagantId)-1);
-            classement.put(perdantId, classement.get(perdantId)+3);
-        }*/
+    public void majClassement(Long gagantId, Long perdantId, Boolean egalite, Long matchId){
+        this.matchesFinisId.add(matchId);
         Boolean G = false;
         Boolean P = false;
         for (int i=0; i<equipesIds.size();i++){
             if (gagantId.equals(equipesIds.get(i))){
                 G= true;
                 classement.set(i, classement.get(i)+2);
-                System.out.println("here "+i);
+                //System.out.println("here "+i);
             }
             if (perdantId.equals(equipesIds.get(i))){
                 P = true;
                 classement.set(i, classement.get(i)-2);
-                System.out.println("here "+i);
+                //System.out.println("here "+i);
             }
         }
         if (!G) {
@@ -121,7 +110,7 @@ public class Competition {
             classement.set(classement.indexOf(perdantId), classement.get(perdantId.intValue())+3);
         }
 
-        System.out.println("Classement changé " +classement);
+        //System.out.println("Classement changé " +classement);
     }
 
     /*public void setClassement(ArrayList<Equipe> classement) {

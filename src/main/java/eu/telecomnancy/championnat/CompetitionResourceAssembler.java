@@ -15,6 +15,8 @@ class CompetitionResourceAssembler implements ResourceAssembler<Competition, Res
 
         return new Resource<>(competition,
                 linkTo(methodOn(CompetitionController.class).one(competition.getId())).withSelfRel(),
-                linkTo(methodOn(CompetitionController.class).all()).withRel("competitions"));
+                linkTo(methodOn(CompetitionController.class).all()).withRel("competitions")/*,
+                linkTo(methodOn(EquipeController.class).one(competition.equipesIds[]))*/
+        );
     }
 }
