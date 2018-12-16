@@ -1,0 +1,23 @@
+{
+  "equipesIds" : [ 1, 2 ],
+  "name" : "JIG",
+  "classement" : [ 2, -2 ],
+  "matchesFinisId" : [ 4 ],
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8080/competitions/3"
+    },
+    "competitions" : {
+      "href" : "http://localhost:8080/competitions"
+    },
+    "EquipeParticipantes 1" : {
+      "href" : "http://localhost:8080/equipes/1"
+    },
+    "EquipeParticipantes 2" : {
+      "href" : "http://localhost:8080/equipes/2"
+    },
+    "Matchs Finis 4" : {
+      "href" : "http://localhost:8080/matches/4"
+    }
+  }
+}

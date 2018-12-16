@@ -1,0 +1,11 @@
+{
+  "name" : "Nancy",
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8080/equipes/5"
+    },
+    "equipes" : {
+      "href" : "http://localhost:8080/equipes"
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "name" : "BigData",
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8080/equipes/12"
+    },
+    "equipes" : {
+      "href" : "http://localhost:8080/equipes"
+    }
+  }
+}

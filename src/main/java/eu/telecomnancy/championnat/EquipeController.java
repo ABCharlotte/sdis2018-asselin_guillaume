@@ -63,12 +63,7 @@ public class EquipeController {
         Equipe equipe = repository.findById(id)
                 .orElseThrow(() -> new EquipeNotFoundException(id));
         return assembler.toResource(equipe);
-    }//No RESTful
-    /*@GetMapping("/equipes/{id}")
-    Equipe one(@PathVariable Long id){
-        return repository.findById(id)
-                .orElseThrow(() -> new EquipeNotFoundException(id));
-    }*/
+    }
 
     @PutMapping("/equipes/{id}")
     ResponseEntity<?> replaceEquipe(@RequestBody Equipe newEquipe, @PathVariable Long id) throws URISyntaxException {

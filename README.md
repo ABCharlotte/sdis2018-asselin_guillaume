@@ -16,7 +16,11 @@ Utilisation de l'application
  qui est abonné aux actualité du groupe ISS.
  
  
+ Tests
+ ---
+ Pour tester notre code nous avons mis en place un script shell doubler de fichiers textes qui effectuent un comparatif entre la sortie qu'on obtient et la sortie attendue. 
  
+ Pour le lancer il faut lancer l'application puis lancer le fichier `./src/test/tests.sh`
  
  
  SUJET

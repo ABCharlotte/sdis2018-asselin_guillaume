@@ -72,6 +72,12 @@ public class MatchController {
         Match updatedMatch = matchRepository.findById(id)
                 .map(match -> {
                     match.setId(newMatch.getId());
+                    match.setEquipeDomicileName(newMatch.getEquipeDomicileName());
+                    match.setEquipeDomicileId(newMatch.getEquipeDomicileId());
+                    match.setEquipeDomicileScore(newMatch.getEquipeDomicileScore());
+                    match.setEquipeInviteName(newMatch.getEquipeInviteName());
+                    match.setEquipeInviteId(newMatch.getEquipeInviteId());
+                    match.setEquipeInviteScore(newMatch.getEquipeInviteScore());
                     try {
                         new EmitLog().main(new String[]{match.getEquipeDomicileId().toString(),match.getEquipeDomicileName(),match.getStatus().toString(), String.valueOf(match.getEquipeDomicileScore()),":", String.valueOf(match.getEquipeInviteScore())},match.getEquipeDomicileId().toString());
                         new EmitLog().main(new String[]{match.getEquipeInviteId().toString(),match.getEquipeInviteName(),match.getStatus().toString(), String.valueOf(match.getEquipeInviteScore()),":", String.valueOf(match.getEquipeInviteScore())},match.getEquipeInviteId().toString());
