@@ -1,6 +1,17 @@
- Readme
- ======
+Utilisation de l'application 
+ =
+ Présentation
+ ---
+ Ce TP a été fait par Madame Charlotte ASSELIN-BOULLÉ (ISS) et Monsieur Charles GUILLAUME (ISS) en application des cours de Systèmes Distribués (SDIS) à TELECOM Nancy, encadrés par Monsieur F. CHAROY et Monsieur G. OSTER. 
  
+ Le concept est d'avoir une application permettant de gérer un championnat. 
+ Il existe différentes entités avec leur attributs propres : 
+ - Les competitions, elles ont un identifiant, un nom, peuvent regrouper plusieurs Equipes identifiées par leur Id (dont on propose un accès via les liens), plusieurs matchs de statuts finis (avec liens) et un "classement" correspondant au nombre de points gagnés par une équipe (le nombre de points à l'indice i dans le classement correspond au nombre de point de l'équipe à l'indice i dans la liste des Ids des Equipes).
+ - Les matchs : ont un identifiant unique, deux équipes : une à Domicile et une en extérieur. Pour les deux équipes on propose de visualiser leur nom, leur identifiant unique, ainsi que leur score. Les matchs ont un statut qui peut être PRÉVU, REPORTÉ, ANNULÉ, EN_COURS, PAUSE, FINI. Les transitions suivent une logique imposée : on peut uniquement mettre en pause et fini un match en_cours, annulé et reporté ne peuvent être fait que si le match est prévu. Enfin les matchs peuvent être indépendants où liés à une compétition (dans ce cas là le lien vers la compétition est proposé). Lorsqu'un match passe en fini, si il est lié à une compétition, l'identifiant du match s'ajoute dans la liste des matchs fini de la compétition et le score des deux équipes influent le classement : si les deux équipes sont à égalité elles gagent chacune 1 point, sinon le gagant gagne 2 points, le perdant en perd 2. 
+ - Les équipes : elles sont là encore identifiées par un ID unique et possèdent un nom.  
+ 
+ Abonnement 
+ ---
  Pour lancer le serveur, lancer l'application spring. Pour le receveur, il faut lancer le receveurISS
  qui est abonné aux actualité du groupe ISS.
  
@@ -8,12 +19,11 @@
  
  
  
- 
  SUJET
- =========
+ =
  
  TP Systèmes distribués
-===========
+---
 A faire par groupe de 2
 
 Le but du TP est de réaliser une API REST pour une application permettant de gérer les scores de
