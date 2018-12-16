@@ -1,3 +1,17 @@
+ Readme
+ ======
+ 
+ Pour lancer le serveur, lancer l'application spring. Pour le receveur, il faut lancer le receveurISS
+ qui est abonné aux actualité du groupe ISS.
+ 
+ 
+ 
+ 
+ 
+ 
+ SUJET
+ =========
+ 
  TP Systèmes distribués
 ===========
 A faire par groupe de 2
